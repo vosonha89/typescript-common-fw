@@ -1,6 +1,5 @@
 import 'reflect-metadata';
-import { container, singleton } from 'tsyringe';
-import { StorageService } from './storageService';
+import { singleton } from 'tsyringe';
 
 interface SharingData {
     key: string;
@@ -64,8 +63,16 @@ export class SharingDataService {
     */
     public deleteObject(key: string): boolean {
         const me = this;
+
         try {
-            return true;
+            const index = me.dataSharing.findIndex(a => a.key == key);
+            if (index > -1) {
+                me.dataSharing.splice(index, 1);
+                return true;
+            }
+            else {
+                return false;
+            }
         } catch (ex) {
             console.log(ex);
             return false;
