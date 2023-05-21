@@ -1,6 +1,6 @@
 export class UIHelper {
     /**
-     * Create element from string
+     * Create element from string for reactjs
      * @param text 
      * @returns 
      */
