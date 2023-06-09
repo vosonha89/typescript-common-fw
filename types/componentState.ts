@@ -14,4 +14,9 @@ export abstract class ComponentState {
     public copy<TObject>(): TObject {
         return ObjectHelper.deepCopy(this) as unknown as TObject;
     }
+
+    /**
+     * App on init
+     */
+    public abstract init() : void;
 }
