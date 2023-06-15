@@ -27,14 +27,28 @@ export class ObjectHelper {
         return false;
     }
 
-    /**
+       /**
      * Deep copy any object
      * @param value 
      * @returns 
      */
-    public static deepCopy<T extends object>(value: T): T {
-        const deepObject = structuredClone(value);
+       public static deepCopy<T extends object>(value: T): T {
+        const deepObject = structuredClone(value) as any;
         const newObject = Object.create(value);
-        return Object.assign(newObject, deepObject);
+        const allKeys = Object.keys(deepObject);
+        for(let i = 0; i< allKeys.length; i++)
+        {
+            if (typeof newObject[allKeys[i]] != 'object')
+            {
+                newObject[allKeys[i]] = deepObject[allKeys[i]];
+            }
+            else{
+                if (newObject[allKeys[i]] == undefined)
+                {
+                    newObject[allKeys[i]] = deepObject[allKeys[i]];
+                }
+            }
+        }
+        return newObject;
     }
 }
