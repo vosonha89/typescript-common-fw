@@ -36,19 +36,46 @@ export class ObjectHelper {
         const deepObject = structuredClone(value) as any;
         const newObject = Object.create(value);
         const allKeys = Object.keys(deepObject);
-        for(let i = 0; i< allKeys.length; i++)
+        for(const element of allKeys)
         {
-            if (typeof newObject[allKeys[i]] != 'object')
+            if (typeof newObject[element] != 'object')
             {
-                newObject[allKeys[i]] = deepObject[allKeys[i]];
+                newObject[element] = deepObject[element];
             }
             else{
-                if (newObject[allKeys[i]] == undefined)
+                if (newObject[element] == undefined)
                 {
-                    newObject[allKeys[i]] = deepObject[allKeys[i]];
+                    newObject[element] = deepObject[element];
                 }
             }
         }
         return newObject;
+    }
+
+     /**
+     * Get URL Param
+     * @param name 
+     * @returns 
+     */
+     public static getURLParam(name: string): string | null {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+    }
+
+    /**
+     * Set URL Param
+     * @param name 
+     * @param value 
+     * @param isSilent 
+     */
+    public static setURLParam(name: string, value: string, isSilent = true): void {
+        const url = new URL(window.location.href);
+        url.searchParams.set(name, value);
+        if (isSilent) {
+            history.pushState({}, '', url.toString());
+        }
+        else {
+            window.location.href = url.toString();
+        }
     }
 }
