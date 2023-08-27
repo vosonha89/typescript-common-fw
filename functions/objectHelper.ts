@@ -78,4 +78,24 @@ export class ObjectHelper {
             window.location.href = url.toString();
         }
     }
+
+    /**
+     * Get cookie
+     * @param name Cookie name
+     * @returns 
+     */
+    public static getCookie(name: string): string {
+        const cookieName = name + '=';
+        const cookies = document.cookie.split(';');
+        for (const element of cookies) {
+            let cookie = element;
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1);
+            }
+            if (cookie.indexOf(cookieName) == 0) {
+                return cookie.substring(cookieName.length, cookie.length);
+            }
+        }
+        return '';
+    }
 }
