@@ -1,13 +1,14 @@
 import 'reflect-metadata';
+import { BehaviorSubject } from 'rxjs';
 import { singleton } from 'tsyringe';
 
-interface SharingData extends ICommonSharingData {
-    value: string;
+interface RealTimeSharingData<T> extends ICommonSharingData {
+    listener: BehaviorSubject<T>;
 }
 
 @singleton()
-export class SharingDataService {
-    private dataSharing: SharingData[] = [];
+export class RealTimeSharingDataService {
+    private dataSharing: ICommonSharingData[] = [];
 
     /**
      * Save object for sharing storage
@@ -21,12 +22,9 @@ export class SharingDataService {
             if (!existedData) {
                 existedData = {
                     key: key,
-                    value: JSON.stringify(value)
-                } as SharingData;
+                    listener: new BehaviorSubject<T>(value)
+                } as RealTimeSharingData<T> as ICommonSharingData;
                 me.dataSharing.push(existedData);
-            }
-            else {
-                existedData.value = JSON.stringify(value);
             }
             return true;
         } catch (ex) {
@@ -39,12 +37,12 @@ export class SharingDataService {
      * Get object from sharing storage
      * @param key
      */
-    public getObject<T>(key: string): T | undefined {
+    public getObject<T>(key: string): RealTimeSharingData<T> | undefined {
         const me = this;
         try {
             const data = me.dataSharing.find(a => a.key == key);
             if (data) {
-                return JSON.parse(data.value);
+                return data as RealTimeSharingData<T>;
             }
             else {
                 return undefined;
