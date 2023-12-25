@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { BehaviorSubject } from 'rxjs';
 import { singleton } from 'tsyringe';
+import { ICommonSharingData } from '../types/commonInterface';
 
 interface RealTimeSharingData<T> extends ICommonSharingData {
     listener: BehaviorSubject<T>;

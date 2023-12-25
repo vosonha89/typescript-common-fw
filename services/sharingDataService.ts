@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { singleton } from 'tsyringe';
+import { ICommonSharingData } from '../types/commonInterface';
 
 interface SharingData extends ICommonSharingData {
     value: string;

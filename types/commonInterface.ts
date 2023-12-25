@@ -1,6 +1,6 @@
 /**
  * Commong interface for sharing data
  */
-interface ICommonSharingData {
+export interface ICommonSharingData {
     key: string;
 }
