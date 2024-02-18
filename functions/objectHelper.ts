@@ -27,24 +27,21 @@ export class ObjectHelper {
         return false;
     }
 
-       /**
+    /**
      * Deep copy any object
      * @param value 
      * @returns 
      */
-       public static deepCopy<T extends object>(value: T): T {
+    public static deepCopy<T extends object>(value: T): T {
         const deepObject = structuredClone(value) as any;
         const newObject = Object.create(value);
         const allKeys = Object.keys(deepObject);
-        for(const element of allKeys)
-        {
-            if (typeof newObject[element] != 'object')
-            {
+        for (const element of allKeys) {
+            if (typeof newObject[element] != 'object') {
                 newObject[element] = deepObject[element];
             }
-            else{
-                if (newObject[element] == undefined)
-                {
+            else {
+                if (newObject[element] == undefined) {
                     newObject[element] = deepObject[element];
                 }
             }
@@ -52,12 +49,12 @@ export class ObjectHelper {
         return newObject;
     }
 
-     /**
-     * Get URL Param
-     * @param name 
-     * @returns 
-     */
-     public static getURLParam(name: string): string | null {
+    /**
+    * Get URL Param
+    * @param name 
+    * @returns 
+    */
+    public static getURLParam(name: string): string | null {
         const url = new URL(window.location.href);
         return url.searchParams.get(name);
     }
