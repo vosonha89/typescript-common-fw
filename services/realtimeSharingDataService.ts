@@ -27,6 +27,9 @@ export class RealTimeSharingDataService {
                 } as RealTimeSharingData<T> as ICommonSharingData;
                 me.dataSharing.push(existedData);
             }
+            else {
+                (existedData as RealTimeSharingData<T>).listener.next(value);
+            }
             return true;
         } catch (ex) {
             console.log(ex);
