@@ -22,7 +22,9 @@ export class ObjectHelper {
      */
     public static hasApiError(response: unknown): boolean {
         if (Object.prototype.hasOwnProperty.call(response, 'code')) {
-            return true;
+            if ((response as any).code != 0) {
+                return true;
+            }
         }
         return false;
     }
