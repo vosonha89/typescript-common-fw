@@ -79,6 +79,22 @@ export class ObjectHelper {
     }
 
     /**
+    * Delete URL Param
+    * @param name 
+    * @param isSilent 
+    */
+    public static deleteURLParam(name: string, isSilent = true): void {
+        const url = new URL(window.location.href);
+        url.searchParams.delete(name);
+        if (isSilent) {
+            history.pushState({}, '', url.toString());
+        }
+        else {
+            window.location.href = url.toString();
+        }
+    }
+
+    /**
      * Get cookie
      * @param name Cookie name
      * @returns 
