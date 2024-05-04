@@ -33,4 +33,13 @@ export class CommonFunction {
     public static randomNumber(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    /**
+     * Add ms millisecond timeout before promise resolution
+     * @param ms 
+     * @returns 
+     */
+    public static sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
 }
