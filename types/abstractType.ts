@@ -9,3 +9,8 @@ export abstract class AbstractType {
  * Any Type
  */
 export type AnyType = any;
+
+/**
+ * Undefined Type
+ */
+export type UndefinedType = undefined;
