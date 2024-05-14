@@ -52,6 +52,28 @@ export class ObjectHelper {
     }
 
     /**
+     * Deep copy any object
+     * @param value 
+     * @returns 
+     */
+    public static deepCopyHemers<T extends object>(value: T): T {
+        const deepObject = JSON.stringify(value) as any;
+        const newObject = Object.create(value);
+        const allKeys = Object.keys(deepObject);
+        for (const element of allKeys) {
+            if (typeof newObject[element] != 'object') {
+                newObject[element] = deepObject[element];
+            }
+            else {
+                if (newObject[element] == undefined) {
+                    newObject[element] = deepObject[element];
+                }
+            }
+        }
+        return newObject;
+    }
+
+    /**
     * Get URL Param
     * @param name 
     * @returns 
