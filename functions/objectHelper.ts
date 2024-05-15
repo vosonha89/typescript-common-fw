@@ -57,7 +57,7 @@ export class ObjectHelper {
      * @returns 
      */
     public static deepCopyHemers<T extends object>(value: T): T {
-        const deepObject = JSON.stringify(value) as any;
+        const deepObject = value as any;
         const newObject = Object.create(value);
         const allKeys = Object.keys(deepObject);
         for (const element of allKeys) {
